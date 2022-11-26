@@ -53,12 +53,12 @@ public class PickObject : MonoBehaviour
 
         if (!ObjectIsGrab)
         {
-            if (Physics.Raycast(RayHead, transform.TransformDirection(Vector3.forward), out hitHead, detectionDistance, LayerMask.GetMask("Pickable")))
+            if (Physics.Raycast(RayHead, transform.TransformDirection(Vector3.forward), out hitHead, detectionDistance))
             {
                 Debug.DrawRay(RayHead, transform.TransformDirection(Vector3.forward) * hitHead.distance, Color.red, 2f);
                 if (hitHead.collider != null)
                 {
-                    objectPicked =  hitHead.transform.gameObject;
+                    objectPicked = hitHead.transform.parent.gameObject;
                 }
             }
             else if (Physics.Raycast(RayBody, transform.TransformDirection(Vector3.forward), out hitBody, detectionDistance, LayerMask.GetMask("Pickable")))
@@ -66,7 +66,7 @@ public class PickObject : MonoBehaviour
                 Debug.DrawRay(RayBody, transform.TransformDirection(Vector3.forward) * hitBody.distance, Color.green, 2f);
                 if (hitBody.collider != null)
                 {
-                    objectPicked = hitBody.transform.gameObject;
+                    objectPicked = hitBody.transform.parent.gameObject;
                 }
             }
             else if (Physics.Raycast(RayFoot, transform.TransformDirection(Vector3.forward), out hitFoot, detectionDistance, LayerMask.GetMask("Pickable")))
@@ -74,7 +74,7 @@ public class PickObject : MonoBehaviour
                 Debug.DrawRay(RayFoot, transform.TransformDirection(Vector3.forward) * hitFoot.distance, Color.blue, 2f);
                 if (hitFoot.collider != null)
                 {
-                    objectPicked = hitFoot.transform.gameObject;
+                    objectPicked = hitFoot.transform.parent.gameObject;
                 }
             }
             else if (hitHead.collider == null && hitBody.collider == null && hitBody.collider == null)

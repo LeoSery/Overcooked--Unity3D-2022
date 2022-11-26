@@ -168,13 +168,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uncutItems:
-  - {fileID: 8117145151774176142, guid: af6af657da616284b847c74b41cb37a2, type: 3}
-  - {fileID: 7779686113578417453, guid: 95cd72cd8b47be348aed29129aa9cd1b, type: 3}
-  - {fileID: 3760798317562446000, guid: 68fbb7644a3617347b76118101fc2b82, type: 3}
+  - {fileID: 4778605321696033072, guid: 26d7300dc23821c49834f1669a077094, type: 3}
+  - {fileID: 120471110821044891, guid: 96877a6e64fe40044a37d473103258c0, type: 3}
+  - {fileID: 367788429883331596, guid: 68fbb7644a3617347b76118101fc2b82, type: 3}
+  uncutModels:
+  - {fileID: 1022117407767928898, guid: 485f873ad9ab6e349b3586d71796a71a, type: 3}
+  - {fileID: 555036770874936271, guid: c835c3a0164dabb418a8925954181103, type: 3}
+  - {fileID: 9145006913822169268, guid: fa60090b8d696f1429252ff1cb2d6084, type: 3}
   cutedItems:
   - {fileID: 2675734947558488289, guid: d996af42513d7ad46922bfe26022b8a4, type: 3}
-  - {fileID: 5839619528929188504, guid: a86543497888ab64ab7fa9370ef8861c, type: 3}
-  - {fileID: 8834196181591232684, guid: 2ce392084392010409d87d5234f80ed5, type: 3}
+  - {fileID: 896866283965554594, guid: a86543497888ab64ab7fa9370ef8861c, type: 3}
+  - {fileID: 4162662454220786151, guid: 2ce392084392010409d87d5234f80ed5, type: 3}
+  cutedModels:
+  - {fileID: 5550040574126636394, guid: a4c6cc23d53e57c4e85eae5a5c713c75, type: 3}
+  - {fileID: 5395169496925634683, guid: 7e2d7ed7645e4d345b4490106c956d72, type: 3}
+  - {fileID: 9180401200873299343, guid: 8bd77aae181dfc541b9f718b54390397, type: 3}
   foodSpawners: []
   cuttingBoards: []
 --- !u!4 &179970574 stripped
@@ -1670,7 +1678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8388958389415189755, guid: cce062d8d622d22418f7696846b1bab8, type: 3}
       propertyPath: heightRayHead
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8388958389415189755, guid: cce062d8d622d22418f7696846b1bab8, type: 3}
       propertyPath: detectionDistance

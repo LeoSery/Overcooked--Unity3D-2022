@@ -15,6 +15,7 @@ public class Food : MonoBehaviour
 
     [Header("GameObjects :")]
     public GameObject currentFood;
+    public GameObject Model;
 
     public Mesh newFoodAppearance;
     public Material newFoodRenderer;
@@ -22,7 +23,7 @@ public class Food : MonoBehaviour
     [Header("Settings :")]
     public State currentState;
 
-    public GameObject cuttedObject;
+    public GameObject cuttedModel;
     public GameObject currentCuttingBoard;
 
     private GameManager gameManager;
@@ -31,6 +32,7 @@ public class Food : MonoBehaviour
     void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Model = transform.GetChild(0).gameObject;
     }
 
     void Start()
@@ -40,22 +42,15 @@ public class Food : MonoBehaviour
 
     public void Cut()
     {
-        cuttedObject = gameManager.cutedItems[currentFoodIndex];
+        cuttedModel = gameManager.cutedModels[currentFoodIndex];
+        var cuttingBoardScript = currentCuttingBoard.GetComponent<CuttingBoard>();
 
-        if (cuttedObject.transform.childCount == 0)
+        if (currentState == State.CanBeCut)
         {
-            newFoodAppearance = cuttedObject.GetComponent<MeshFilter>().sharedMesh;
-            gameObject.GetComponent<MeshFilter>().sharedMesh = newFoodAppearance;
-            newFoodRenderer = cuttedObject.GetComponent<MeshRenderer>().sharedMaterial;
-            gameObject.GetComponent<MeshRenderer>().sharedMaterial = newFoodRenderer;
-            gameObject.transform.localScale = cuttedObject.transform.localScale;
+            DestroyImmediate(Model);
+            Instantiate(cuttedModel, cuttingBoardScript.foodAttachementPoint.transform.position, Quaternion.identity, gameObject.transform);
+            currentState = State.CanBeBake;
         }
-        else
-        {
-            var cuttingBoardScript = currentCuttingBoard.GetComponent<CuttingBoard>();
-            Instantiate(cuttedObject, cuttingBoardScript.foodAttachementPoint.transform.position, Quaternion.identity, currentCuttingBoard.transform);
-        }
-        currentState = State.CanBeBake;
     }
 
     public void Bake()

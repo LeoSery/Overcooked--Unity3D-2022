@@ -228,10 +228,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPicked: {fileID: 0}
   objectPickedPos: {fileID: 4034031607573313447}
-  detectionDistance: 0
-  heightRayHead: 0
+  detectionDistance: 2
+  heightRayHead: 0.5
   heightRayBody: 0
-  heightRayFoot: 0
+  heightRayFoot: -1
   ObjectIsGrab: 0
 --- !u!136 &8057450748037274890
 CapsuleCollider:
