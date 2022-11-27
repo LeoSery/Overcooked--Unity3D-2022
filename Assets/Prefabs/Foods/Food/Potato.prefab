@@ -50,8 +50,11 @@ MonoBehaviour:
   newFoodAppearance: {fileID: 0}
   newFoodRenderer: {fileID: 0}
   currentState: 0
-  cuttedObject: {fileID: 0}
+  foodInPan: 0
+  cuttedModel: {fileID: 0}
+  coockedModel: {fileID: 0}
   currentCuttingBoard: {fileID: 0}
+  currentGasCoocker: {fileID: 0}
 --- !u!1001 &1308355294130305211
 PrefabInstance:
   m_ObjectHideFlags: 0

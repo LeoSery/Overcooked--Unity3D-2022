@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CuttingBoard : MonoBehaviour
@@ -7,13 +5,16 @@ public class CuttingBoard : MonoBehaviour
     [Header("GameObjects :")]
     public GameObject currentFood;
 
+    [HideInInspector] public bool foodIsCut = false;
     private bool foodWaitingToBeCut = false;
     private bool playerIsHere = false;
+    private bool boardInUse = false;
 
     [HideInInspector] public GameObject foodAttachementPoint;
     private GameManager gameManager;
     private PickObject pickObject;
     private GameObject Player;
+    private Food foodScript;
 
     private float startTime = 0f;
     private float holdTime = 3.0f;
@@ -29,20 +30,29 @@ public class CuttingBoard : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && playerIsHere && pickObject.ObjectIsGrab)
+        if (Input.GetKeyDown(KeyCode.E) && playerIsHere && pickObject.ObjectIsGrab && !boardInUse)
         {
             GetTheFoodToCut();
             foodWaitingToBeCut = true;
+            boardInUse = true;
         }
 
         if (Input.GetKey(KeyCode.R) && playerIsHere && foodWaitingToBeCut)
         {
             if (KeyPressedLongEnough(KeyCode.R, holdTime))
             {
-                var foodScript = currentFood.GetComponent<Food>();
                 foodScript.currentCuttingBoard = gameObject;
                 foodScript.Cut();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F) && playerIsHere && pickObject.ObjectIsGrab == false && boardInUse)
+        {
+            pickObject.objectPicked = currentFood;
+            currentFood.transform.SetParent(pickObject.objectPickedPos.transform);
+            pickObject.objectPicked.transform.position = pickObject.objectPickedPos.transform.position;
+            currentFood = null;
+            pickObject.ObjectIsGrab = true;
         }
     }
 
@@ -51,6 +61,7 @@ public class CuttingBoard : MonoBehaviour
         currentFood = pickObject.objectPicked;
         currentFood.transform.SetParent(foodAttachementPoint.transform);
         currentFood.transform.position = foodAttachementPoint.transform.position;
+        foodScript = currentFood.GetComponent<Food>();
 
         pickObject.objectPicked = null;
         pickObject.ObjectIsGrab = false;
@@ -93,9 +104,9 @@ public class CuttingBoard : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            foreach (GameObject Spawner in gameManager.foodSpawners)
+            foreach (GameObject cuttingBoard in gameManager.cuttingBoards)
             {
-                if (Spawner == transform.gameObject)
+                if (cuttingBoard == transform.gameObject)
                 {
                     playerIsHere = false;
                 }

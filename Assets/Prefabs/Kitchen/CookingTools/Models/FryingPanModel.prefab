@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9180401200873299343
+--- !u!1 &803149981404713595
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 339519260360618072}
-  - component: {fileID: 6869594528118129446}
-  - component: {fileID: 6679333760020718753}
-  m_Layer: 6
-  m_Name: SlicedSaladModel
-  m_TagString: Pickable
+  - component: {fileID: 31116228530342081}
+  - component: {fileID: 4017588681966749540}
+  - component: {fileID: 1163512924700079022}
+  m_Layer: 0
+  m_Name: FryingPanModel
+  m_TagString: FryingPan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &339519260360618072
+--- !u!4 &31116228530342081
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9180401200873299343}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 803149981404713595}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.15, z: 0.9}
+  m_LocalScale: {x: 500, y: 500, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6869594528118129446
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!33 &4017588681966749540
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9180401200873299343}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6679333760020718753
+  m_GameObject: {fileID: 803149981404713595}
+  m_Mesh: {fileID: 3495225198683614240, guid: 0bb1bc295d169694392d2b1fccd5c0c5, type: 3}
+--- !u!23 &1163512924700079022
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9180401200873299343}
+  m_GameObject: {fileID: 803149981404713595}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9a4ab7fc6e20f2e439234b70886c5284, type: 2}
+  - {fileID: -5301714245026017995, guid: 0bb1bc295d169694392d2b1fccd5c0c5, type: 3}
+  - {fileID: 2508803835893104646, guid: 0bb1bc295d169694392d2b1fccd5c0c5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

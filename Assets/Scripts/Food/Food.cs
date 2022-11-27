@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Food : MonoBehaviour
@@ -8,7 +6,11 @@ public class Food : MonoBehaviour
     {
         Uundistributed,
         CanBeCut,
+        CanBePutInPan,
+        InPan,
         CanBeBake,
+        Baked,
+        CanBePutInPlate,
         CanBeServed,
         Served
     }
@@ -22,9 +24,12 @@ public class Food : MonoBehaviour
 
     [Header("Settings :")]
     public State currentState;
+    public bool foodInPan = false;
 
     public GameObject cuttedModel;
+    public GameObject coockedModel;
     public GameObject currentCuttingBoard;
+    public GameObject currentGasCoocker;
 
     private GameManager gameManager;
     private int currentFoodIndex;
@@ -49,12 +54,22 @@ public class Food : MonoBehaviour
         {
             DestroyImmediate(Model);
             Instantiate(cuttedModel, cuttingBoardScript.foodAttachementPoint.transform.position, Quaternion.identity, gameObject.transform);
-            currentState = State.CanBeBake;
+            cuttingBoardScript.foodIsCut = true;
+            currentState = State.CanBePutInPan;
         }
     }
 
-    public void Bake()
-    {
+    //public void Bake()
+    //{
+    //    coockedModel = gameManager.coockedItems[currentFoodIndex];
+    //    var gazCoockerScirpt = currentGasCoocker.GetComponent<GasCoocker>();
 
-    }
+    //    if (currentState == State.CanBeBake)
+    //    {
+    //        DestroyImmediate(Model);
+    //        Instantiate(coockedModel, gazCoockerScirpt.foodAttachementPoint.transform.position, Quaternion.identity, gameObject.transform);
+    //        gazCoockerScirpt.foodIsBake = true;
+    //        currentState = State.CanBeServed;
+    //    }
+    //}
 }
