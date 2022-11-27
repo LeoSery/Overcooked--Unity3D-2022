@@ -52,6 +52,7 @@ public class CuttingBoard : MonoBehaviour
             currentFood.transform.SetParent(pickObject.objectPickedPos.transform);
             pickObject.objectPicked.transform.position = pickObject.objectPickedPos.transform.position;
             currentFood = null;
+            boardInUse = false;
             pickObject.ObjectIsGrab = true;
         }
     }
