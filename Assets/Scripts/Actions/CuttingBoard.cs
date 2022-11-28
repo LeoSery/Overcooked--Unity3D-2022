@@ -2,15 +2,25 @@ using UnityEngine;
 
 public class CuttingBoard : MonoBehaviour
 {
+    public enum TypeOfObjectInCutting
+    {
+        None,
+        Food,
+        CoockingTool
+    }
+
     [Header("GameObjects :")]
+    public TypeOfObjectInCutting typeOfObjectInCutting;
     public GameObject currentFood;
 
+    [HideInInspector] public GameObject foodAttachementPoint;
     [HideInInspector] public bool foodIsCut = false;
+
+
     private bool foodWaitingToBeCut = false;
     private bool playerIsHere = false;
     private bool boardInUse = false;
 
-    [HideInInspector] public GameObject foodAttachementPoint;
     private GameManager gameManager;
     private PickObject pickObject;
     private GameObject Player;
@@ -18,7 +28,6 @@ public class CuttingBoard : MonoBehaviour
 
     private float startTime = 0f;
     private float holdTime = 3.0f;
-
 
     private void Awake()
     {
@@ -41,8 +50,24 @@ public class CuttingBoard : MonoBehaviour
         {
             if (KeyPressedLongEnough(KeyCode.R, holdTime))
             {
-                foodScript.currentCuttingBoard = gameObject;
-                foodScript.Cut();
+                if (typeOfObjectInCutting == TypeOfObjectInCutting.Food)
+                {
+                    if (foodScript.canCut == Food.CanCut.Yes)
+                    {
+                        foodScript.currentCuttingBoard = gameObject;
+                        foodScript.Cut();
+                    } 
+                    else
+                    {
+                        Debug.LogWarning("This ingredient cannot be cut !");
+                        //TODO: Show UI message with this text.
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("A kitchen utensil cannot be cut !");
+                    //TODO: Show UI message with this text. 
+                }
             }
         }
 
@@ -51,14 +76,18 @@ public class CuttingBoard : MonoBehaviour
             pickObject.objectPicked = currentFood;
             currentFood.transform.SetParent(pickObject.objectPickedPos.transform);
             pickObject.objectPicked.transform.position = pickObject.objectPickedPos.transform.position;
+            typeOfObjectInCutting = TypeOfObjectInCutting.None;
+            pickObject.ObjectIsGrab = true;
             currentFood = null;
             boardInUse = false;
-            pickObject.ObjectIsGrab = true;
         }
     }
 
     void GetTheFoodToCut()
     {
+        var objectPlaced = pickObject.objectPicked;
+        GetInfosOfObject(objectPlaced);
+
         currentFood = pickObject.objectPicked;
         currentFood.transform.SetParent(foodAttachementPoint.transform);
         currentFood.transform.position = foodAttachementPoint.transform.position;
@@ -66,6 +95,17 @@ public class CuttingBoard : MonoBehaviour
 
         pickObject.objectPicked = null;
         pickObject.ObjectIsGrab = false;
+    }
+
+    void GetInfosOfObject(GameObject objectPlaced)
+    {
+        var PlacedfoodScript = objectPlaced.GetComponent<Food>();
+        var PlacedPanScript = objectPlaced.GetComponent<FryingPan>();
+
+        if (PlacedfoodScript != null && PlacedPanScript == null)
+            typeOfObjectInCutting = TypeOfObjectInCutting.Food;
+        else if (PlacedfoodScript == null && PlacedPanScript != null)
+            typeOfObjectInCutting = TypeOfObjectInCutting.CoockingTool;
     }
 
     bool KeyPressedLongEnough(KeyCode key, float holdTime)

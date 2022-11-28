@@ -421,6 +421,65 @@ Transform:
   m_Father: {fileID: 1018009650}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &725849720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1651013840}
+    m_Modifications:
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818191428640534746, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
+      propertyPath: m_Name
+      value: GasCooker
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
 --- !u!1 &808869195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,8 +1161,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1829115879}
   - {fileID: 179970574}
+  - {fileID: 1801642273}
   m_Father: {fileID: 808869196}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1204,10 +1263,10 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705877354}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1829115879 stripped
+--- !u!4 &1801642273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-  m_PrefabInstance: {fileID: 7512191817330127526}
+  m_PrefabInstance: {fileID: 725849720}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1847821708
 GameObject:
@@ -1726,62 +1785,3 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 759d93c815c21d047930317be0579f6c, type: 3}
---- !u!1001 &7512191817330127526
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 1651013840}
-    m_Modifications:
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 648589163393055451, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3818191428640534746, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}
-      propertyPath: m_Name
-      value: GasCooker
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: ffed3d5ba71c3eb418c46e2f3d93be66, type: 3}

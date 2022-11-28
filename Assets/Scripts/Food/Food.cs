@@ -15,6 +15,18 @@ public class Food : MonoBehaviour
         Served
     }
 
+    public enum CanCut
+    {
+        Yes,
+        No
+    }
+
+    public enum CanBake
+    {
+        Yes,
+        No
+    }
+
     [Header("GameObjects :")]
     public GameObject currentFood;
     public GameObject Model;
@@ -24,6 +36,8 @@ public class Food : MonoBehaviour
 
     [Header("Settings :")]
     public State currentState;
+    public CanCut canCut;
+    public CanBake canBake;
     public bool foodInPan = false;
 
     public GameObject cuttedModel;
@@ -54,22 +68,25 @@ public class Food : MonoBehaviour
         {
             DestroyImmediate(Model);
             Instantiate(cuttedModel, cuttingBoardScript.foodAttachementPoint.transform.position, Quaternion.identity, gameObject.transform);
+            Model = transform.GetChild(0).gameObject;
             cuttingBoardScript.foodIsCut = true;
             currentState = State.CanBePutInPan;
         }
     }
 
-    //public void Bake()
-    //{
-    //    coockedModel = gameManager.coockedItems[currentFoodIndex];
-    //    var gazCoockerScirpt = currentGasCoocker.GetComponent<GasCoocker>();
+    public void Bake()
+    {
+        coockedModel = gameManager.coockedModels[currentFoodIndex];
+        var gazCoockerScirpt = currentGasCoocker.GetComponent<GasCoocker>();
 
-    //    if (currentState == State.CanBeBake)
-    //    {
-    //        DestroyImmediate(Model);
-    //        Instantiate(coockedModel, gazCoockerScirpt.foodAttachementPoint.transform.position, Quaternion.identity, gameObject.transform);
-    //        gazCoockerScirpt.foodIsBake = true;
-    //        currentState = State.CanBeServed;
-    //    }
-    //}
+        if (currentState == State.CanBeBake)
+        {
+            DestroyImmediate(Model);
+            var currentFoodContainerScript = gazCoockerScirpt.currentFoodContainer.GetComponent<FryingPan>();
+            Instantiate(coockedModel, currentFoodContainerScript.foodLocation.transform.position, Quaternion.identity, gameObject.transform);
+            Model = transform.GetChild(0).gameObject;
+            gazCoockerScirpt.foodIsBake = true;
+            currentState = State.CanBeServed;
+        }
+    }
 }

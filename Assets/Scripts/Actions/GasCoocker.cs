@@ -2,106 +2,191 @@ using UnityEngine;
 
 public class GasCoocker : MonoBehaviour
 {
-    //[Header("GameObjects :")]
-    //public GameObject currentFood;
+    public enum TypeOfObjectInCoocker
+    {
+        None,
+        Food,
+        CoockingTool
+    }
 
-    //[HideInInspector] public bool foodIsBake = false;
-    //private bool foodWaitingToBeBake = false;
-    //private bool playerIsHere = false;
-    //private bool CoockerInUse = false;
+    [Header("GameObjects :")]
+    public GameObject currentFood;
+    [HideInInspector] public GameObject foodAttachementPoint;
+    [HideInInspector] public GameObject currentFoodContainer;
+    public TypeOfObjectInCoocker typeOfObjectInCoocker;
 
-    //private float startTime = 0f;
-    //private float holdTime = 3.0f;
+    [HideInInspector] public bool foodIsBake = false;
+    private bool foodWaitingToBeBake = false;
+    private bool playerIsHere = false;
+    private bool coockerInUse = false;
 
-    //[HideInInspector] public GameObject foodAttachementPoint;
-    //private GameManager gameManager;
-    //private PickObject pickObject;
-    //private GameObject Player;
-    //private Food foodScript;
+    private GameObject Player;
+    private GameManager gameManager;
+    private PickObject pickObject;
+    private Food foodScript;
+    private FryingPan currentContainerScript;
 
-    //void Awake()
-    //{
-    //    gameManager = GetComponent<GameManager>();
-    //    Player = GameObject.FindGameObjectWithTag("Player");
-    //    pickObject = Player.GetComponent<PickObject>();
-    //    foodAttachementPoint = transform.GetChild(2).gameObject;
-    //}
+    private float startTime = 0f;
+    private float holdTime = 3.0f;
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.F) && playerIsHere && pickObject.ObjectIsGrab)
-    //    {
-    //        GetTheFoodToBake();
-    //        foodWaitingToBeBake = true;
-    //    }
+    private void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        pickObject = Player.GetComponent<PickObject>();
+        foodAttachementPoint = transform.GetChild(2).gameObject;
+    }
 
-    //    if (Input.GetKey(KeyCode.F) && playerIsHere && foodWaitingToBeBake)
-    //    {
-    //        if (KeyPressedLongEnough(KeyCode.F, holdTime))
-    //        {
-    //            var foodScript = currentFood.GetComponent<Food>();
-    //            foodScript.currentGasCoocker = gameObject;
-    //            foodScript.Bake();
-    //        }
-    //    }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && playerIsHere && pickObject.ObjectIsGrab && !coockerInUse)
+        {
+            GetTheFoodToBake();
+            foodWaitingToBeBake = true;
+            coockerInUse = true;
+        }
 
-    //void GetTheFoodToBake()
-    //{
-    //    currentFood = pickObject.objectPicked;
-    //    currentFood.transform.SetParent(foodAttachementPoint.transform);
-    //    currentFood.transform.position = foodAttachementPoint.transform.position;
-    //    foodScript = currentFood.GetComponent<Food>();
+        if (Input.GetKey(KeyCode.R) && playerIsHere && foodWaitingToBeBake)
+        {
+            if (KeyPressedLongEnough(KeyCode.R, holdTime))
+            {
+                if (typeOfObjectInCoocker == TypeOfObjectInCoocker.CoockingTool)
+                {
+                    if (currentContainerScript.currentFood != null)
+                    {
+                        if (foodScript.canBake == Food.CanBake.Yes)
+                        {
+                            foodScript.currentGasCoocker = gameObject;
+                            foodScript.Bake();
+                        }
+                        else
+                        {
+                            Debug.LogWarning("This ingredient cannot be cooked !");
+                            //TODO: Show UI message with this text.
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Put ingredients in your pan before you start cooking");
+                        //TODO: Show UI message with this text.
+                    }
+                }
+                else if (typeOfObjectInCoocker == TypeOfObjectInCoocker.Food)
+                {
+                    Debug.LogWarning("Put the ingredient in a frying pan before cooking it");
+                    //TODO: Show UI message with this text.
+                }
+            }
+        }
 
-    //    pickObject.objectPicked = null;
-    //    pickObject.ObjectIsGrab = false;
-    //}
+        if (Input.GetKeyDown(KeyCode.F) && playerIsHere && pickObject.ObjectIsGrab == false && coockerInUse)
+        {
+            if (typeOfObjectInCoocker == TypeOfObjectInCoocker.CoockingTool)
+            {
+                pickObject.objectPicked = currentFoodContainer;
+                currentFoodContainer = null;
+                currentFood = null;
+            } 
+            else if (typeOfObjectInCoocker == TypeOfObjectInCoocker.Food)
+            {
+                pickObject.objectPicked = currentFood;
+                currentFood = null;
+            }
+            pickObject.objectPicked.transform.SetParent(pickObject.objectPickedPos.transform);
+            pickObject.objectPicked.transform.position = pickObject.objectPickedPos.transform.position;
+            typeOfObjectInCoocker = TypeOfObjectInCoocker.None;
+            pickObject.ObjectIsGrab = true;
+            coockerInUse = false;
+        }
+    }
 
-    //bool KeyPressedLongEnough(KeyCode key, float holdTime)
-    //{
-    //    if (Input.GetKeyDown(key))
-    //        startTime = Time.time;
+    void GetTheFoodToBake()
+    {
+        var objectPlaced = pickObject.objectPicked;
+        GetInfosOfObject(objectPlaced);
 
-    //    if (Input.GetKey(key))
-    //        if (startTime + holdTime <= Time.time)
-    //            return true;
-    //        else
-    //            return false;
-    //    else
-    //        return false;
-    //}
+        if (typeOfObjectInCoocker == TypeOfObjectInCoocker.CoockingTool)
+        {
+            currentFoodContainer = pickObject.objectPicked;
+            currentContainerScript = currentFoodContainer.GetComponent<FryingPan>();
+            currentFood = currentContainerScript.currentFood;
+            currentFoodContainer.transform.SetParent(foodAttachementPoint.transform);
+            currentFoodContainer.transform.position = foodAttachementPoint.transform.position;
 
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Player"))
-    //    {
-    //        Debug.LogWarning("Player is here");
-    //        foreach (GameObject gazCoocker in gameManager.gazCoockers)
-    //        {
-    //            if (gazCoocker == transform.gameObject)
-    //            {
-    //                playerIsHere = true;
-    //            }
-    //            else
-    //            {
-    //                var gazCoockerScript = gazCoocker.GetComponent<GasCoocker>();
-    //                gazCoockerScript.playerIsHere = false;
-    //            }
-    //        }
-    //    }
-    //}
+            if (currentFood != null)
+                foodScript = currentFood.GetComponent<Food>();
+        } 
+        else if (typeOfObjectInCoocker == TypeOfObjectInCoocker.Food)
+        {
+            currentFood = pickObject.objectPicked;
+            currentFood.transform.SetParent(foodAttachementPoint.transform);
+            currentFood.transform.position = foodAttachementPoint.transform.position;
+            foodScript = currentFood.GetComponent<Food>();
+        }
 
-    //public void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Player"))
-    //    {
-    //        foreach (GameObject gazCoocker in gameManager.gazCoockers)
-    //        {
-    //            if (gazCoocker == transform.gameObject)
-    //            {
-    //                playerIsHere = false;
-    //            }
-    //        }
-    //    }
-    //}
+
+        if (currentFoodContainer != null && currentFood != null && foodScript.currentState == Food.State.InPan)
+            foodScript.currentState = Food.State.CanBeBake;
+
+        pickObject.objectPicked = null;
+        pickObject.ObjectIsGrab = false;
+    }
+
+    void GetInfosOfObject(GameObject objectPlaced)
+    {
+        var PlacedfoodScript = objectPlaced.GetComponent<Food>();
+        var PlacedPanScript = objectPlaced.GetComponent<FryingPan>();
+
+        if (PlacedfoodScript != null && PlacedPanScript == null)
+            typeOfObjectInCoocker = TypeOfObjectInCoocker.Food;
+        else if (PlacedfoodScript == null && PlacedPanScript != null)
+            typeOfObjectInCoocker = TypeOfObjectInCoocker.CoockingTool;
+    }
+
+    bool KeyPressedLongEnough(KeyCode key, float holdTime)
+    {
+        if (Input.GetKeyDown(key))
+            startTime = Time.time;
+
+        if (Input.GetKey(key))
+            if (startTime + holdTime <= Time.time)
+                return true;
+            else
+                return false;
+        else
+            return false;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            foreach (GameObject gasCoocker in gameManager.gazCoockers)
+            {
+                if (gasCoocker == transform.gameObject)
+                {
+                    playerIsHere = true;
+                }
+                else
+                {
+                    var gasCoockerScript = gasCoocker.GetComponent<GasCoocker>();
+                    gasCoockerScript.playerIsHere = false;
+                }
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            foreach (GameObject gasCoocker in gameManager.gazCoockers)
+            {
+                if (gasCoocker == transform.gameObject)
+                {
+                    playerIsHere = false;
+                }
+            }
+        }
+    }
 }

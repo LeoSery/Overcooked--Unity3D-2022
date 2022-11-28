@@ -13,7 +13,7 @@ public class FryingPan : MonoBehaviour
     private PickObject pickObject;
     private Food foodScript;
 
-    private GameObject foodLocation;
+    [HideInInspector] public GameObject foodLocation;
     private GameObject Player;
 
     void Awake()
@@ -101,7 +101,6 @@ public class FryingPan : MonoBehaviour
         {
             foreach (GameObject Pan in gameManager.fryingPans)
             {
-                Debug.LogWarning("Player is near : " + gameObject.name);
                 if (Pan == transform.gameObject)
                 {
                     playerIsHere = true;
@@ -119,7 +118,6 @@ public class FryingPan : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.LogWarning("Player is near : " + gameObject.name);
             foreach (GameObject Pan in gameManager.fryingPans)
             {
                 if (Pan == transform.gameObject)
