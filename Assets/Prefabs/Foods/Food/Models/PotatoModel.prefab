@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7685362293279174700}
   - component: {fileID: 8487705070644283900}
   - component: {fileID: 2237572560062510851}
-  - component: {fileID: 5216295998001209}
   - component: {fileID: 7797040140262661542}
   m_Layer: 6
   m_Name: PotatoModel
@@ -85,20 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5216295998001209
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022117407767928898}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  m_Radius: 0.5000001
-  m_Height: 2.0000005
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &7797040140262661542
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -61,19 +61,19 @@ public class GasCoocker : MonoBehaviour
                         }
                         else
                         {
-                            Debug.LogWarning("This ingredient cannot be cooked !");
+                            Debug.LogWarning("GazCoocker > This ingredient cannot be cooked !");
                             //TODO: Show UI message with this text.
                         }
                     }
                     else
                     {
-                        Debug.LogWarning("Put ingredients in your pan before you start cooking");
+                        Debug.LogWarning("GazCoocker > Put ingredients in your pan before you start cooking");
                         //TODO: Show UI message with this text.
                     }
                 }
                 else if (typeOfObjectInCoocker == TypeOfObjectInCoocker.Food)
                 {
-                    Debug.LogWarning("Put the ingredient in a frying pan before cooking it");
+                    Debug.LogWarning("GazCoocker > Put the ingredient in a frying pan before cooking it");
                     //TODO: Show UI message with this text.
                 }
             }
@@ -84,9 +84,11 @@ public class GasCoocker : MonoBehaviour
             if (typeOfObjectInCoocker == TypeOfObjectInCoocker.CoockingTool)
             {
                 pickObject.objectPicked = currentFoodContainer;
+                currentContainerScript = currentFoodContainer.GetComponent<FryingPan>();
+                currentContainerScript.panInCoocker = false;
                 currentFoodContainer = null;
                 currentFood = null;
-            } 
+            }
             else if (typeOfObjectInCoocker == TypeOfObjectInCoocker.Food)
             {
                 pickObject.objectPicked = currentFood;
@@ -109,13 +111,14 @@ public class GasCoocker : MonoBehaviour
         {
             currentFoodContainer = pickObject.objectPicked;
             currentContainerScript = currentFoodContainer.GetComponent<FryingPan>();
+            currentContainerScript.panInCoocker = true;
             currentFood = currentContainerScript.currentFood;
             currentFoodContainer.transform.SetParent(foodAttachementPoint.transform);
             currentFoodContainer.transform.position = foodAttachementPoint.transform.position;
 
             if (currentFood != null)
                 foodScript = currentFood.GetComponent<Food>();
-        } 
+        }
         else if (typeOfObjectInCoocker == TypeOfObjectInCoocker.Food)
         {
             currentFood = pickObject.objectPicked;
@@ -123,7 +126,6 @@ public class GasCoocker : MonoBehaviour
             currentFood.transform.position = foodAttachementPoint.transform.position;
             foodScript = currentFood.GetComponent<Food>();
         }
-
 
         if (currentFoodContainer != null && currentFood != null && foodScript.currentState == Food.State.InPan)
             foodScript.currentState = Food.State.CanBeBake;
@@ -134,12 +136,12 @@ public class GasCoocker : MonoBehaviour
 
     void GetInfosOfObject(GameObject objectPlaced)
     {
-        var PlacedfoodScript = objectPlaced.GetComponent<Food>();
-        var PlacedPanScript = objectPlaced.GetComponent<FryingPan>();
+        var placedFoodScript = objectPlaced.GetComponent<Food>();
+        var placedPanScript = objectPlaced.GetComponent<FryingPan>();
 
-        if (PlacedfoodScript != null && PlacedPanScript == null)
+        if (placedFoodScript != null && placedPanScript == null)
             typeOfObjectInCoocker = TypeOfObjectInCoocker.Food;
-        else if (PlacedfoodScript == null && PlacedPanScript != null)
+        else if (placedFoodScript == null && placedPanScript != null)
             typeOfObjectInCoocker = TypeOfObjectInCoocker.CoockingTool;
     }
 

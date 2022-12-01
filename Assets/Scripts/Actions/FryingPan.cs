@@ -8,6 +8,7 @@ public class FryingPan : MonoBehaviour
     [Header("Infos :")]
     public bool playerIsHere = false;
     public bool panIsFull = false;
+    public bool panInCoocker = false;
 
     private GameManager gameManager;
     private PickObject pickObject;
@@ -34,8 +35,8 @@ public class FryingPan : MonoBehaviour
                 {
                     PutContentInPan();
                 }
-            } 
-            else if (Input.GetKeyDown(KeyCode.F))
+            }
+            else if (Input.GetKeyDown(KeyCode.F) && !panInCoocker)
             {
                 if (!pickObject.ObjectIsGrab && panIsFull)
                 {

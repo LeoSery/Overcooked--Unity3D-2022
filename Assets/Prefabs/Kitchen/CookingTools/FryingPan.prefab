@@ -50,6 +50,8 @@ MonoBehaviour:
   currentFood: {fileID: 0}
   playerIsHere: 0
   panIsFull: 0
+  panInCoocker: 0
+  foodLocation: {fileID: 0}
 --- !u!65 &8146114444754346206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61,8 +63,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5, z: 1.8224177}
-  m_Center: {x: 0, y: 0.14085446, z: 0.18946505}
+  m_Size: {x: 1.5, y: 0.5, z: 1.8589416}
+  m_Center: {x: 0, y: 0.14085448, z: 0.18103433}
 --- !u!1 &7218718830014079975
 GameObject:
   m_ObjectHideFlags: 0

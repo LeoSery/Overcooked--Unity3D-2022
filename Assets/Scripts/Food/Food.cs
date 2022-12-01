@@ -70,7 +70,11 @@ public class Food : MonoBehaviour
             Instantiate(cuttedModel, cuttingBoardScript.foodAttachementPoint.transform.position, Quaternion.identity, gameObject.transform);
             Model = transform.GetChild(0).gameObject;
             cuttingBoardScript.foodIsCut = true;
-            currentState = State.CanBePutInPan;
+
+            if (canBake == CanBake.No)
+                currentState = State.CanBePutInPlate;
+            else
+                currentState = State.CanBePutInPan;
         }
     }
 
@@ -86,7 +90,7 @@ public class Food : MonoBehaviour
             Instantiate(coockedModel, currentFoodContainerScript.foodLocation.transform.position, Quaternion.identity, gameObject.transform);
             Model = transform.GetChild(0).gameObject;
             gazCoockerScirpt.foodIsBake = true;
-            currentState = State.CanBeServed;
+            currentState = State.Baked;
         }
     }
 }

@@ -16,7 +16,6 @@ public class CuttingBoard : MonoBehaviour
     [HideInInspector] public GameObject foodAttachementPoint;
     [HideInInspector] public bool foodIsCut = false;
 
-
     private bool foodWaitingToBeCut = false;
     private bool playerIsHere = false;
     private bool boardInUse = false;
@@ -56,16 +55,16 @@ public class CuttingBoard : MonoBehaviour
                     {
                         foodScript.currentCuttingBoard = gameObject;
                         foodScript.Cut();
-                    } 
+                    }
                     else
                     {
-                        Debug.LogWarning("This ingredient cannot be cut !");
+                        Debug.LogWarning("CuttingsBoard > This ingredient cannot be cut !");
                         //TODO: Show UI message with this text.
                     }
                 }
                 else
                 {
-                    Debug.LogWarning("A kitchen utensil cannot be cut !");
+                    Debug.LogWarning("CuttingsBoard > A kitchen utensil cannot be cut !");
                     //TODO: Show UI message with this text. 
                 }
             }

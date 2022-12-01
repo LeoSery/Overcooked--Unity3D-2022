@@ -87,9 +87,14 @@ public class PickObject : MonoBehaviour
 
     public void PickUpObject()
     {
-        objectPicked.transform.SetParent(objectPickedPos.transform);
-        objectPicked.transform.position = objectPickedPos.transform.position;
-        ObjectIsGrab = true;
+        if (objectPicked != null)
+        {
+            objectPicked.transform.SetParent(objectPickedPos.transform);
+            objectPicked.transform.position = objectPickedPos.transform.position;
+            ObjectIsGrab = true;
+        }
+        else
+            Debug.LogWarning("PickObject > No object to catch in front of you, try to get closer to an object.");
     }
 
     public void DropObject()
