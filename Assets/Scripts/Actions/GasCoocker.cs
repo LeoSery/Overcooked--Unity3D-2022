@@ -25,6 +25,7 @@ public class GasCoocker : MonoBehaviour
     private PickObject pickObject;
     private Food foodScript;
     private FryingPan currentContainerScript;
+    private Collider contentCollider;
 
     private float startTime = 0f;
     private float holdTime = 3.0f;
@@ -85,6 +86,7 @@ public class GasCoocker : MonoBehaviour
             {
                 pickObject.objectPicked = currentFoodContainer;
                 currentContainerScript = currentFoodContainer.GetComponent<FryingPan>();
+                contentCollider.enabled = true;
                 currentContainerScript.panInCoocker = false;
                 currentFoodContainer = null;
                 currentFood = null;
@@ -118,6 +120,8 @@ public class GasCoocker : MonoBehaviour
 
             if (currentFood != null)
                 foodScript = currentFood.GetComponent<Food>();
+            contentCollider = currentContainerScript.GetComponent<Collider>();
+            contentCollider.enabled = false;
         }
         else if (typeOfObjectInCoocker == TypeOfObjectInCoocker.Food)
         {

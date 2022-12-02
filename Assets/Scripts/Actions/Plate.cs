@@ -142,7 +142,7 @@ public class Plate : MonoBehaviour
             {
                 if (Plate == transform.gameObject)
                 {
-                    playerIsHere = true;
+                    playerIsHere = false;
                 }
             }
         }

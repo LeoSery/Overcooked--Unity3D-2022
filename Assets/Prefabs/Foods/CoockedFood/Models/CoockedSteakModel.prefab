@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 663154929782913406}
   - component: {fileID: 1178737542282448944}
   - component: {fileID: 5896541030521401465}
+  - component: {fileID: 1565038138874634656}
   m_Layer: 6
   m_Name: CoockedSteakModel
   m_TagString: Pickable
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1565038138874634656
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8733652117695574843}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 2, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
