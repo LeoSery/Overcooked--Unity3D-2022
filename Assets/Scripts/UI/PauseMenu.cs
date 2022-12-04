@@ -44,9 +44,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
-#if UNITY_EDITOR
-        Debug.LogWarning("Closing the game...");
-#endif
-        Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 }
