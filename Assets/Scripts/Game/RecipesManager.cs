@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,18 +13,21 @@ public class RecipesManager : MonoBehaviour
     public List<Recipie> listRecipies = new();
 
     private GameManager gameManager;
+    private UIManager uiManager;
 
     void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     void Start()
     {
-        GenerateReceipe(3);
+        GenerateRecipe(3);
+        uiManager.UpdateRecipieListUI();
     }
 
-    public void GenerateReceipe(int nbReceipes)
+    public void GenerateRecipe(int nbReceipes)
     {
         for (int i = 0; i < nbReceipes; i++)
         {
@@ -38,6 +40,13 @@ public class RecipesManager : MonoBehaviour
             }
             listRecipies.Add(NewReceipie);
         }
+    }
+
+    public void GenerateNewRecipe(int nbRecipies)
+    {
+        listRecipies.RemoveAt(0);
+        GenerateRecipe(nbRecipies);
+        uiManager.UpdateRecipieListUI();
     }
 
     GameObject TakeRandomIngredient()

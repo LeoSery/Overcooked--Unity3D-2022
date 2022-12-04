@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -5,14 +6,18 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
+    public List<TextMeshProUGUI> ingredientsTexts;
+    public GameObject LoseMenuUI;
     public int gameScore;
 
-    void Start()
+    private RecipesManager recipiesManager;
+
+    void Awake()
     {
-        scoreText.text = "Score : " + gameScore + "$";
+        recipiesManager = GameObject.Find("ReceipiesManager").GetComponent<RecipesManager>();
     }
 
-    void UpdateScoreUI()
+    void Start()
     {
         scoreText.text = "Score : " + gameScore + "$";
     }
@@ -21,6 +26,11 @@ public class UIManager : MonoBehaviour
     {
         gameScore += scoreToAdd;
         UpdateScoreUI();
+    }
+
+    void UpdateScoreUI()
+    {
+        scoreText.text = "Score : " + gameScore + "$";
     }
 
     public void UpdateTimerUI(int Minutes, int Seconds)
@@ -32,5 +42,20 @@ public class UIManager : MonoBehaviour
             formatedSeconds = Seconds.ToString();
 
         timerText.text = Minutes.ToString() + ":" + formatedSeconds;
+    }
+
+    public void UpdateRecipieListUI()
+    {
+        List<GameObject> currentRecipeIngredients = recipiesManager.GetAllIngredients(recipiesManager.GetNextDishToDeliver());
+        for (int i = 0; i < currentRecipeIngredients.Count; i++)
+        {
+            ingredientsTexts[i].text = currentRecipeIngredients[i].name;
+        }
+    }
+
+    public void ShowLoseScreen()
+    {
+        LoseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

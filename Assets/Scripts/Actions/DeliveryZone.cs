@@ -60,7 +60,6 @@ public class DeliveryZone : MonoBehaviour
                 currentObject.transform.SetParent(dishLocation.transform);
                 pickObject.objectPicked = null;
                 pickObject.ObjectIsGrab = false;
-                //plateScript = currentObject.GetComponent<Plate>();
 
                 IngrementPlayerPoints();
                 DestroyImmediate(currentObject);
@@ -132,11 +131,12 @@ public class DeliveryZone : MonoBehaviour
     void IngrementPlayerPoints()
     {
         uiManager.IncreaseScore(100);
+        recipesManager.GenerateNewRecipe(1);
     }
 
     void Loose()
     {
-        Debug.LogWarning("You loose");
+        uiManager.ShowLoseScreen();
     }
 
     public void OnTriggerEnter(Collider other)

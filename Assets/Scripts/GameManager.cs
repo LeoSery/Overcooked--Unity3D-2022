@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1;
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         currentTime = gameDuration;
     }
@@ -67,6 +68,7 @@ public class GameManager : MonoBehaviour
         {
             currentTime = 0;
             uiManager.UpdateTimerUI(0, 0);
+            uiManager.ShowLoseScreen();
         }
     }
 }
