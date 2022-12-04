@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class Receipies
+public class Recipie
 {
     public List<GameObject> Ingredients = new();
 }
 
 public class RecipesManager : MonoBehaviour
 {
-    public List<Receipies> listReceipies = new();
+    public List<Recipie> listRecipies = new();
 
     private GameManager gameManager;
 
@@ -20,31 +20,23 @@ public class RecipesManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            GenerateReceipe(2);
-        }
-    }
-
     void Start()
     {
-        //GenerateReceipe(3);
+        GenerateReceipe(3);
     }
 
-    void GenerateReceipe(int nbReceipes)
+    public void GenerateReceipe(int nbReceipes)
     {
         for (int i = 0; i < nbReceipes; i++)
         {
-            Receipies NewReceipie = new();
+            Recipie NewReceipie = new();
             int nbIngredientsInDish = Random.Range(1, 4);
             for (int j = 0; j < nbIngredientsInDish; j++)
             {
                 GameObject NewIngredient = TakeRandomIngredient();
                 NewReceipie.Ingredients.Add(NewIngredient);
             }
-            listReceipies.Add(NewReceipie);
+            listRecipies.Add(NewReceipie);
         }
     }
 
@@ -52,5 +44,16 @@ public class RecipesManager : MonoBehaviour
     {
         GameObject Ingredient = gameManager.uncutItems[Random.Range(0, gameManager.uncutItems.Length)];
         return Ingredient;
+    }
+
+    public Recipie GetNextDishToDeliver()
+    {
+        Recipie Receipie = listRecipies.First();
+        return Receipie;
+    }
+
+    public List<GameObject> GetAllIngredients(Recipie dishToPrepare)
+    {
+        return dishToPrepare.Ingredients;
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5570853977390654605}
   m_Layer: 0
   m_Name: Potato
-  m_TagString: Untagged
+  m_TagString: Potato
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,8 @@ MonoBehaviour:
   newFoodAppearance: {fileID: 0}
   newFoodRenderer: {fileID: 0}
   currentState: 0
+  canCut: 0
+  canBake: 0
   foodInPan: 0
   cuttedModel: {fileID: 0}
   coockedModel: {fileID: 0}
