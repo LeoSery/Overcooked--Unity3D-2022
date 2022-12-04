@@ -73,6 +73,8 @@ public class CuttingBoard : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && playerIsHere && pickObject.ObjectIsGrab == false && boardInUse)
         {
             pickObject.objectPicked = currentFood;
+            var currentCollider = currentFood.GetComponent<Collider>();
+            currentCollider.enabled = true;
             currentFood.transform.SetParent(pickObject.objectPickedPos.transform);
             pickObject.objectPicked.transform.position = pickObject.objectPickedPos.transform.position;
             typeOfObjectInCutting = TypeOfObjectInCutting.None;
@@ -88,6 +90,8 @@ public class CuttingBoard : MonoBehaviour
         GetInfosOfObject(objectPlaced);
 
         currentFood = pickObject.objectPicked;
+        var currentCollider = currentFood.GetComponent<Collider>();
+        currentCollider.enabled = false;
         currentFood.transform.SetParent(foodAttachementPoint.transform);
         currentFood.transform.position = foodAttachementPoint.transform.position;
         foodScript = currentFood.GetComponent<Food>();

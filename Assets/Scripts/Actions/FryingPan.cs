@@ -57,8 +57,7 @@ public class FryingPan : MonoBehaviour
             currentFood.transform.position = foodLocation.transform.position;
 
             foodScript.foodInPan = true;
-            var currentFoodModel = currentFood.transform.GetChild(0).gameObject;
-            var currentCollider = currentFoodModel.GetComponent<Collider>();
+            var currentCollider = currentFood.GetComponent<Collider>();
             currentCollider.enabled = false;
 
             pickObject.objectPicked = null;
@@ -81,8 +80,7 @@ public class FryingPan : MonoBehaviour
         foodScript = currentFood.GetComponent<Food>();
 
         foodScript.foodInPan = false;
-        var currentFoodModel = currentFood.transform.GetChild(0).gameObject;
-        var currentCollider = currentFoodModel.GetComponent<Collider>();
+        var currentCollider = currentFood.GetComponent<Collider>();
         currentCollider.enabled = true;
 
         pickObject.ObjectIsGrab = true;

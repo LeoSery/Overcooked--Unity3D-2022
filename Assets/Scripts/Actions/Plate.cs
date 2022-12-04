@@ -67,6 +67,8 @@ public class Plate : MonoBehaviour
             {
                 lastFoodPut.transform.SetParent(foodLocation.transform);
                 lastFoodPut.transform.position = foodLocation.transform.position;
+                var currentCollider = lastFoodPut.GetComponent<Collider>();
+                currentCollider.enabled = false;
 
                 pickObject.objectPicked = null;
                 pickObject.ObjectIsGrab = false;
@@ -95,6 +97,8 @@ public class Plate : MonoBehaviour
         GameObject elementToGet = dishIngredients.Last();
         int indexElementToget = dishIngredients.IndexOf(elementToGet);
         Food foodScriptElementToGet = elementToGet.GetComponent<Food>();
+        var currentCollider = elementToGet.GetComponent<Collider>();
+        currentCollider.enabled = true;
         pickObject.objectPicked = elementToGet;
         pickObject.objectPicked.transform.SetParent(pickObject.objectPickedPos.transform);
         pickObject.objectPicked.transform.position = pickObject.objectPickedPos.transform.position;
