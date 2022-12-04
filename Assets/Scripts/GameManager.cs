@@ -2,6 +2,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Timer
+    [Header("Timer :")]
+    public float gameDuration;
+
+    private UIManager uiManager;
+
+    private float currentTime = 0f;
+    private int Minutes;
+    private int Seconds;
+    #endregion
+
+    #region Objects references
     [Header("GamesObjects :")]
     [Header("Uncut Items :")]
     public GameObject[] uncutItems;
@@ -26,6 +38,13 @@ public class GameManager : MonoBehaviour
     [Header("Coocking tools :")]
     public GameObject[] fryingPans;
     public GameObject[] plates;
+    #endregion
+
+    void Awake()
+    {
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        currentTime = gameDuration;
+    }
 
     void Start()
     {
@@ -33,17 +52,21 @@ public class GameManager : MonoBehaviour
         cuttingBoards = GameObject.FindGameObjectsWithTag("CuttingBoard");
         gazCoockers = GameObject.FindGameObjectsWithTag("GazCoocker");
         deliveryZones = GameObject.FindGameObjectsWithTag("DeliveryZone");
+    }
 
-        //var tempFryingPans = GameObject.FindGameObjectsWithTag("FryingPan");
-        //for(int i = 0; i < tempFryingPans.Length; i++)
-        //{
-        //    fryingPans[i] = tempFryingPans[i].transform.parent.gameObject;
-        //}
-
-        ///var tempPlates = GameObject.FindGameObjectsWithTag("Plate");
-        //for(int i = 1; i <= tempPlates.Length; i++)
-        //{
-        //    plates[i] = tempPlates[i].transform.parent.gameObject;
-        //}
+    void Update()
+    {
+        if (currentTime > 0)
+        {
+            currentTime -= 1 * Time.deltaTime;
+            Minutes = Mathf.FloorToInt(currentTime / 60);
+            Seconds = Mathf.FloorToInt(currentTime % 60);
+            uiManager.UpdateTimerUI(Minutes, Seconds);
+        }
+        else
+        {
+            currentTime = 0;
+            uiManager.UpdateTimerUI(0, 0);
+        }
     }
 }

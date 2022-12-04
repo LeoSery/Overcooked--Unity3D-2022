@@ -20,6 +20,7 @@ public class DeliveryZone : MonoBehaviour
     private FryingPan fryingPan;
     private Plate plateScript;
     private RecipesManager recipesManager;
+    private UIManager uiManager;
 
     private GameObject dishLocation;
     private GameObject Player;
@@ -34,6 +35,7 @@ public class DeliveryZone : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         recipesManager = GameObject.Find("ReceipiesManager").GetComponent<RecipesManager>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
         pickObject = Player.GetComponent<PickObject>();
         dishLocation = transform.GetChild(1).gameObject;
@@ -112,7 +114,7 @@ public class DeliveryZone : MonoBehaviour
 
     void IngrementPlayerPoints()
     {
-        Debug.LogWarning("Points ++");
+        uiManager.IncreaseScore(100);
     }
 
     void Loose()
