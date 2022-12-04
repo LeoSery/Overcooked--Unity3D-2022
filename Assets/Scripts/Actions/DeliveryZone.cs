@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DeliveryZone : MonoBehaviour
@@ -20,10 +17,12 @@ public class DeliveryZone : MonoBehaviour
     private FryingPan fryingPan;
     private Plate plateScript;
     private RecipesManager recipesManager;
+    private PlateSpawner plateSpawner;
     private UIManager uiManager;
 
     private GameObject dishLocation;
     private GameObject Player;
+    private bool sameNumberOfIngredients = false;
 
     //debug
     public List<GameObject> currentDishIngredients;
@@ -35,6 +34,7 @@ public class DeliveryZone : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         recipesManager = GameObject.Find("ReceipiesManager").GetComponent<RecipesManager>();
+        plateSpawner = GameObject.FindGameObjectWithTag("PlateSpawner").GetComponent<PlateSpawner>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         Player = GameObject.FindGameObjectWithTag("Player");
         pickObject = Player.GetComponent<PickObject>();
@@ -55,16 +55,33 @@ public class DeliveryZone : MonoBehaviour
         if (CheckIfObjectIsADish(currentObject))
         {
             if (CheckInfosOfDish(currentObject))
-                IngrementPlayerPoints();
-            else
-                Loose();
+            {
+                currentObject.transform.position = dishLocation.transform.position;
+                currentObject.transform.SetParent(dishLocation.transform);
+                pickObject.objectPicked = null;
+                pickObject.ObjectIsGrab = false;
+                //plateScript = currentObject.GetComponent<Plate>();
 
-            currentObject.transform.position = dishLocation.transform.position;
-            currentObject.transform.SetParent(dishLocation.transform);
-            pickObject.objectPicked = null;
-            pickObject.ObjectIsGrab = false;
-            plateScript = currentObject.GetComponent<Plate>();
-            DestroyImmediate(currentObject);
+                IngrementPlayerPoints();
+                DestroyImmediate(currentObject);
+                plateSpawner.InstanciateNewPlate();
+
+            }
+            else
+            {
+                if (!sameNumberOfIngredients)
+                {
+                    Debug.LogWarning("DeliveryZone > You must deliver the same number of ingredients as in the recipe.");
+                    //TODO: Show UI message with this text.
+                    Loose();
+                }
+                else
+                {
+                    Loose();
+                    DestroyImmediate(currentObject);
+                    plateSpawner.InstanciateNewPlate();
+                }
+            }
         }
         else
         {
@@ -92,10 +109,10 @@ public class DeliveryZone : MonoBehaviour
 
         if (ingredientsDishToPrepare.Count != currentDishIngredients.Count)
         {
-            Debug.LogWarning("DeliveryZone > Your dish does not contain the same number of ingredients as in the requested recipe.");
-            //TODO: Show UI message with this text.
+            sameNumberOfIngredients = false;
             return false;
         }
+        sameNumberOfIngredients = true;
 
         for (int i = 0; i < currentDishIngredients.Count; i++)
         {
