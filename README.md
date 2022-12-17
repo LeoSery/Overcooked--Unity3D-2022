@@ -4,11 +4,10 @@ Game made during my bachelor 3 year (2022/2023) for a Unity3D module at Ynov Bor
 ## Summary :
 
 - Presentation
-- Keys in game
+- Game keys
 - Main mechanics
 - How to open the project
 - How to build the project
-- Warning
 
 ## Presentation :
 
